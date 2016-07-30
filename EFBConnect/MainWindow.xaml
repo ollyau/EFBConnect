@@ -1,0 +1,75 @@
+﻿<Window x:Class="EFBConnect.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EFBConnect"
+        mc:Ignorable="d"
+        Title="EFB Connect" SizeToContent="Height" Width="525" ResizeMode="CanMinimize" UseLayoutRounding="True">
+    <Window.DataContext>
+        <local:MainViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <local:MessageDialogTextConverter x:Key="MessageDialogTextConverter" />
+        <local:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
+    <Grid>
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Margin="5,0,5,10" FontSize="16" Text="{Binding ConnectedString}" />
+            <Expander Grid.Row="1" Header="Options" Margin="5">
+                <Grid Margin="20,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <RadioButton Grid.Row="0" Margin="5" Content="Broadcast" IsChecked="{Binding Connection, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static local:ConnectionType.Broadcast}}" />
+                    <RadioButton Grid.Row="1" Margin="5" Grid.Column="0" Content="{Binding CurrentIpSetting}" IsChecked="{Binding Connection, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static local:ConnectionType.IPAddress}}" />
+                </Grid>
+            </Expander>
+        </Grid>
+        <Border Background="#80000000" Visibility="{Binding OverlayEnabled, Converter={StaticResource BoolToVis}}" />
+        <Grid Visibility="{Binding MessageDialogEnabled, Converter={StaticResource BoolToVis}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1" Grid.Column="1" Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".25*"/>
+                    <ColumnDefinition Width="1.618034*"/>
+                    <ColumnDefinition Width=".25*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Margin="20" Grid.Column="1">
+                    <TextBlock Text="{Binding MessageDialogTitle}" Visibility="{Binding MessageDialogTitle, Converter={StaticResource MessageDialogTextConverter}}" FontSize="22" Margin="5" />
+                    <TextBlock Text="{Binding MessageDialogContent}" Visibility="{Binding MessageDialogContent, Converter={StaticResource MessageDialogTextConverter}}" TextWrapping="Wrap" Margin="5"/>
+                    <Button Command="{Binding MessageDialogClose}" Content="Close" Padding="20,2" HorizontalAlignment="Right" Margin="5"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Grid Visibility="{Binding SetIpDialogEnabled, Converter={StaticResource BoolToVis}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1" Grid.Column="1" Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".25*"/>
+                    <ColumnDefinition Width="1.618034*"/>
+                    <ColumnDefinition Width=".25*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Margin="20" Grid.Column="1">
+                    <TextBlock Text="Enter device IP address:" Margin="5"/>
+                    <TextBox Text="{Binding DeviceIp}" Margin="5" Padding="2"/>
+                    <Button Command="{Binding SetIpCommand}" Content="Set" Padding="20,2"  HorizontalAlignment="Right" Margin="5"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
