@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverLightPolicyServer", "SilverLightPolicyServer\SilverLightPolicyServer.csproj", "{FD6CC0B7-7492-4A56-924E-AB8D0E9C8910}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimConnectTestSilverLight", "SimConnectTestSilverLight\SimConnectTestSilverLight\SimConnectTestSilverLight.csproj", "{A4158C63-ADA1-472B-B3C3-E1A537D49086}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimConnectTestSilverLight.Web", "SimConnectTestSilverLight\SimConnectTestSilverLight.Web\SimConnectTestSilverLight.Web.csproj", "{157C69C4-1A1F-48DE-82BE-ECF907D5419A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovingMapSL.Web", "MovingMapSL\MovingMapSL.Web\MovingMapSL.Web.csproj", "{C31C8CD8-6878-439F-BEBC-32FA8798017F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovingMapSL", "MovingMapSL\MovingMapSL\MovingMapSL.csproj", "{6EF2AC96-DD86-4D31-A3C3-F830A9E2509F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD6CC0B7-7492-4A56-924E-AB8D0E9C8910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD6CC0B7-7492-4A56-924E-AB8D0E9C8910}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD6CC0B7-7492-4A56-924E-AB8D0E9C8910}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD6CC0B7-7492-4A56-924E-AB8D0E9C8910}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4158C63-ADA1-472B-B3C3-E1A537D49086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4158C63-ADA1-472B-B3C3-E1A537D49086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4158C63-ADA1-472B-B3C3-E1A537D49086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4158C63-ADA1-472B-B3C3-E1A537D49086}.Release|Any CPU.Build.0 = Release|Any CPU
+		{157C69C4-1A1F-48DE-82BE-ECF907D5419A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{157C69C4-1A1F-48DE-82BE-ECF907D5419A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{157C69C4-1A1F-48DE-82BE-ECF907D5419A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{157C69C4-1A1F-48DE-82BE-ECF907D5419A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C31C8CD8-6878-439F-BEBC-32FA8798017F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C31C8CD8-6878-439F-BEBC-32FA8798017F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C31C8CD8-6878-439F-BEBC-32FA8798017F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C31C8CD8-6878-439F-BEBC-32FA8798017F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EF2AC96-DD86-4D31-A3C3-F830A9E2509F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EF2AC96-DD86-4D31-A3C3-F830A9E2509F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EF2AC96-DD86-4D31-A3C3-F830A9E2509F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EF2AC96-DD86-4D31-A3C3-F830A9E2509F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

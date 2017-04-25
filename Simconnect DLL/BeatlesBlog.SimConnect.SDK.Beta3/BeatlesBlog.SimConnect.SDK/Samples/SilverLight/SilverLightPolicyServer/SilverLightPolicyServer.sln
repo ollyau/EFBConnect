@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverLightPolicyServer", "SilverLightPolicyServer.csproj", "{FD6CC0B7-7492-4A56-924E-AB8D0E9C8910}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD6CC0B7-7492-4A56-924E-AB8D0E9C8910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD6CC0B7-7492-4A56-924E-AB8D0E9C8910}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD6CC0B7-7492-4A56-924E-AB8D0E9C8910}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD6CC0B7-7492-4A56-924E-AB8D0E9C8910}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

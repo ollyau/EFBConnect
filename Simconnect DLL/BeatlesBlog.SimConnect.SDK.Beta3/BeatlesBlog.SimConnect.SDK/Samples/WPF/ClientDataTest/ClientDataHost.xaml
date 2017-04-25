@@ -1,0 +1,155 @@
+﻿<UserControl x:Class="ClientDataTest.ClientDataHost"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    MinHeight="200" MinWidth="160">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <TextBlock TextAlignment="Center"
+                   Grid.Row="0"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20" FontWeight="700">
+            Client Data Host
+        </TextBlock>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock TextAlignment="Center"
+                   Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20" FontWeight="700">
+            API 1
+            </TextBlock>
+
+            <TextBlock TextAlignment="Center" 
+                   Grid.Row="1" Grid.Column="0" 
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20">
+            Val 1
+            </TextBlock>
+            <TextBox Name="txtVal1"
+                   Grid.Row="1" Grid.Column="1" 
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20">
+                3.1415
+            </TextBox>
+
+            <TextBlock TextAlignment="Center" 
+                   Grid.Row="2" Grid.Column="0" 
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20">
+            Val 2
+            </TextBlock>
+            <TextBox Name="txtVal2" 
+                 Grid.Row="2" Grid.Column="1" 
+                 HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20">
+                1000
+            </TextBox>
+
+            <TextBlock TextAlignment="Center" 
+                   Grid.Row="3" Grid.Column="0" 
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20">
+            Val 3
+            </TextBlock>
+            <TextBox Name="txtVal3" 
+                 Grid.Row="3" Grid.Column="1" 
+                 HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20">
+                10240
+            </TextBox>
+
+            <TextBlock TextAlignment="Center" 
+                   Grid.Row="4" Grid.Column="0" 
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20">
+            Val 4
+            </TextBlock>
+            <TextBox Name="txtVal4" 
+                 Grid.Row="4" Grid.Column="1" 
+                 HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20">
+                0.91375
+            </TextBox>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock TextAlignment="Center"
+                   Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20" FontWeight="700">
+            API 2
+            </TextBlock>
+
+            <TextBlock TextAlignment="Center" 
+                   Grid.Row="1" Grid.Column="0" 
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20">
+            String Value
+            </TextBlock>
+            <TextBox Name="txtVal21" MaxLength="60"
+                   Grid.Row="1" Grid.Column="1" 
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20">
+                Some String
+            </TextBox>
+
+            <TextBlock TextAlignment="Center" 
+                   Grid.Row="2" Grid.Column="0" 
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20">
+            Boolean Value
+            </TextBlock>
+            <CheckBox Name="chkVal22"
+                      Grid.Row="2" Grid.Column="1"
+                      HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20">
+                Check to make var true
+            </CheckBox>
+
+            <TextBlock TextAlignment="Center" 
+                   Grid.Row="3" Grid.Column="0" 
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20">
+            Integer Value
+            </TextBlock>
+            <TextBox Name="txtVal23" 
+                 Grid.Row="3" Grid.Column="1" 
+                 HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20">
+                10
+            </TextBox>
+
+            <TextBlock TextAlignment="Center" 
+                   Grid.Row="4" Grid.Column="0" 
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20">
+            Double Value
+            </TextBlock>
+            <TextBox Name="txtVal24" 
+                 Grid.Row="4" Grid.Column="1" 
+                 HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20">
+                10240
+            </TextBox>
+            
+            <Button Name="btnUpdate" Click="btnUpdate_Click"
+                    Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
+                Update
+            </Button>
+        </Grid>
+
+    </Grid>
+</UserControl>

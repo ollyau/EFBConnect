@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="MovingMapSL.Page"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l="clr-namespace:MovingMapSL"
+             xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+             xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Toolkit"
+             xmlns:ve="clr-namespace:Microsoft.VirtualEarth.MapControl;assembly=Microsoft.VirtualEarth.MapControl">
+    <Grid x:Name="LayoutRoot" Background="White">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition />
+            <RowDefinition Height="32"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="DarkGray" Offset="0" />
+                    <GradientStop Color="Gray" Offset="0.5" />
+                    <GradientStop Color="DarkGray" Offset="1" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10, 0, 0, 0">
+                <TextBlock Foreground="White" FontSize="14" TextAlignment="Center">Beatle's</TextBlock>
+                <TextBlock Foreground="White" FontSize="14" TextAlignment="Center">Blog</TextBlock>
+            </StackPanel>
+            <TextBlock Foreground="LightGray" FontSize="25" FontWeight="700" VerticalAlignment="Center" HorizontalAlignment="Center">Moving Map SL</TextBlock>
+            <HyperlinkButton x:Name="btnFullscreen" VerticalAlignment="Center" HorizontalAlignment="Right" Content="Fullscreen" Margin="0,0,10,0" Click="btnFullscreen_Click" />
+        </Grid>
+        
+        <Grid Grid.Row="1">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <l:SimConnectConfigure x:Name="scConfig" Grid.Column="0" Visibility="Visible" Margin="0,0,20,0" ServerName="localhost" ServerPort="4504" ConnectClicked="scConfig_ConnectClicked" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+            
+            <Grid x:Name="MainUI" Grid.Column="0" Margin="0,0,10,0" Visibility="Collapsed" HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="32" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <Button x:Name="btnClear" Content="Clear History" Click="btnClear_Click" />
+                    <Button x:Name="btnDisconnect" Content="Disconnect" Click="btnDisconnect_Click" />
+                </StackPanel>
+                <ListBox x:Name="lstSamples" Grid.Row="1" HorizontalContentAlignment="Stretch">
+                    <ListBox.Resources>
+                        <l:Trunc6 x:Key="Trunc6" />
+                    </ListBox.Resources>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Latitude, Converter={StaticResource Trunc6}}" HorizontalAlignment="Left" Margin="4,0" />
+                                <TextBlock Grid.Column="1" Text="{Binding Longitude, Converter={StaticResource Trunc6}}" HorizontalAlignment="Left" Margin="4,0" />
+                                <TextBlock Grid.Column="2" Text="{Binding Altitude, Converter={StaticResource Trunc6}}" HorizontalAlignment="Left" Margin="4,0" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            
+            <controls:GridSplitter Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+            
+            <ve:Map x:Name="mapMain" Grid.Column="1" ZoomLevel="13" AnimationLevel="None"></ve:Map>
+        
+        </Grid>
+
+        <Border Grid.Row="2">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="DarkGray" Offset="0" />
+                    <GradientStop Color="Gray" Offset="0.5" />
+                    <GradientStop Color="DarkGray" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimConnectTestConsole", "Console\SimConnectTestConsole\SimConnectTestConsole.csproj", "{869024AE-78C7-41D2-A29C-A536515866F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimConnectTestWinForm", "WinForm\SimConnectTestWinForm\SimConnectTestWinForm.csproj", "{1335B3C7-55FD-4441-8783-D9BC4F2C006D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimConnectTestWPF", "WPF\SimConnectTestWPF\SimConnectTestWPF.csproj", "{51766731-0A88-428F-BACB-9BA26A3C6497}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{869024AE-78C7-41D2-A29C-A536515866F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{869024AE-78C7-41D2-A29C-A536515866F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{869024AE-78C7-41D2-A29C-A536515866F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{869024AE-78C7-41D2-A29C-A536515866F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1335B3C7-55FD-4441-8783-D9BC4F2C006D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1335B3C7-55FD-4441-8783-D9BC4F2C006D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1335B3C7-55FD-4441-8783-D9BC4F2C006D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1335B3C7-55FD-4441-8783-D9BC4F2C006D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51766731-0A88-428F-BACB-9BA26A3C6497}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51766731-0A88-428F-BACB-9BA26A3C6497}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51766731-0A88-428F-BACB-9BA26A3C6497}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51766731-0A88-428F-BACB-9BA26A3C6497}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

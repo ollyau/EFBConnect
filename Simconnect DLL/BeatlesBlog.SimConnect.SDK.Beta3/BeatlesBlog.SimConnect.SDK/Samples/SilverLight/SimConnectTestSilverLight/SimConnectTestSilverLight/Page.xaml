@@ -1,0 +1,133 @@
+﻿<UserControl x:Class="SimConnectTestSilverLight.Page"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Margin="5">
+    <UserControl.Resources>
+        <LinearGradientBrush x:Key="BackgroundBrush"
+                             StartPoint="0,0"
+                             EndPoint="1,0.001">
+            <GradientBrush.GradientStops>
+                <GradientStop Color="#e0e0e0"
+                              Offset="0.0" />
+                <GradientStop Color="#d0d0d0"
+                              Offset="0.2" />
+                <GradientStop Color="#b0b0b0"
+                              Offset="0.8" />
+                <GradientStop Color="#a0a0a0"
+                              Offset="1.0" />
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+        <DataTemplate x:Key="VehiclePositionTemplate">
+            <Border Name="border" 
+                    Background="{StaticResource BackgroundBrush}"
+                    BorderBrush="Black"
+                    BorderThickness="2"
+                    CornerRadius="10"
+                    HorizontalAlignment="Stretch">
+                <Grid Margin="4" ShowGridLines="False">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="6"
+                               FontSize="16"
+                               FontWeight="700"
+                               TextAlignment="Center">
+                        Position and Orientation
+                    </TextBlock>
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="0"
+                               FontWeight="600">
+                        Latitude
+                    </TextBlock>
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="0"
+                               Text="{Binding LatitudeDegrees}" />
+                    <TextBlock Grid.Row="3"
+                               Grid.Column="0"
+                               Text="{Binding LatitudeRadians}" />
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="1"
+                               FontWeight="600">
+                        Longitude
+                    </TextBlock>
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="1"
+                               Text="{Binding LongitudeDegrees}" />
+                    <TextBlock Grid.Row="3"
+                               Grid.Column="1"
+                               Text="{Binding LongitudeRadians}" />
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="2"
+                               FontWeight="600">
+                        Altitude
+                    </TextBlock>
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="2"
+                               Text="{Binding AltitudeFeet}" />
+                    <TextBlock Grid.Row="3"
+                               Grid.Column="2"
+                               Text="{Binding AltitudeMeters}" />
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="3"
+                               FontWeight="600">
+                        Pitch
+                    </TextBlock>
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="3"
+                               Text="{Binding PitchDegrees}" />
+                    <TextBlock Grid.Row="3"
+                               Grid.Column="3"
+                               Text="{Binding PitchRadians}" />
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="4"
+                               FontWeight="600">
+                        Bank
+                    </TextBlock>
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="4"
+                               Text="{Binding BankDegrees}" />
+                    <TextBlock Grid.Row="3"
+                               Grid.Column="4"
+                               Text="{Binding BankRadians}" />
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="5"
+                               FontWeight="600">
+                        Heading
+                    </TextBlock>
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="5"
+                               Text="{Binding HeadingDegrees}" />
+                    <TextBlock Grid.Row="3"
+                               Grid.Column="5"
+                               Text="{Binding HeadingRadians}" />
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="32"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button x:Name="Connect" Click="SimConnectConnect" Content="Connect" Visibility="Visible" />
+            <Button x:Name="Disconnect" Click="SimConnectDisconnect" Content="Disconnect" Visibility="Collapsed" />
+        </StackPanel>
+        <ListBox Grid.Row="1" x:Name="lstViewer" ItemTemplate="{StaticResource VehiclePositionTemplate}" HorizontalContentAlignment="Stretch">
+        </ListBox>
+        <Border Grid.Row="2" Background="{StaticResource BackgroundBrush}" />
+    </Grid>
+</UserControl>

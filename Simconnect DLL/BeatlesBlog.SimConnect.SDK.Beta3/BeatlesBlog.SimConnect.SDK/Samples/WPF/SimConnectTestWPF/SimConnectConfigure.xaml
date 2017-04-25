@@ -1,0 +1,73 @@
+﻿<Window x:Class="SimConnectTestWPF.SimConnectConfigure"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="SimConnect Network Configuration" Height="195" Width="389">
+    <Grid Margin="5">
+        <Grid.Resources>
+            <Style x:Key="Label"
+                   TargetType="{x:Type TextBlock}">
+                <Setter Property="FontWeight"
+                        Value="700" />
+                <Setter Property="VerticalAlignment"
+                        Value="Center" />
+                <Setter Property="HorizontalAlignment"
+                        Value="Center" />
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Style="{StaticResource Label}"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Text="Network Mode:" />
+        <ComboBox Name="cbNetworkMode"
+                  Grid.Row="0"
+                  Grid.Column="1"
+                  Grid.ColumnSpan="3">
+            <ComboBoxItem Content="IPv4" />
+            <ComboBoxItem Content="IPv6" />
+            <ComboBoxItem Content="Pipe" />
+        </ComboBox>
+        <TextBlock Style="{StaticResource Label}"
+                   Grid.Row="2"
+                   Grid.Column="0"
+                   Text="Server Computer:" />
+        <TextBox Name="txtServerName"
+                 Grid.Row="2"
+                 Grid.Column="1"
+                 Grid.ColumnSpan="3">
+        </TextBox>
+        <TextBlock Style="{StaticResource Label}"
+                   Grid.Row="4"
+                   Grid.Column="0"
+                   Text="Server Port/Pipe:" />
+        <TextBox Name="txtServerPort"
+                 Grid.Row="4"
+                 Grid.Column="1"
+                 Grid.ColumnSpan="3">
+        </TextBox>
+        <Button Name="btnOK"
+                Grid.Row="6"
+                Grid.Column="1"
+                Click="btnOK_Click"
+                Content="OK" />
+        <Button Name="btnCancel"
+                Grid.Row="6"
+                Grid.Column="3"
+                Click="btnCancel_Click"
+                Content="Cancel" />
+    </Grid>
+</Window>

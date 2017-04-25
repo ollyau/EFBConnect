@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="MovingMapSL.SimConnectConfigure"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             MinWidth="100" MinHeight="100">
+    <Grid x:Name="LayoutRoot" Background="White">
+
+        <StackPanel Margin="10">
+            <TextBlock Text="SimConnect Connection" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" FontWeight="700" FontSize="14" />
+
+            <TextBlock Text="Server Name / IP" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,10,0,0" FontWeight="600" />
+            <TextBox x:Name="txtServerName" VerticalAlignment="Center" />
+
+            <TextBlock Text="IPv4 Port" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,10,0,0" FontWeight="600" />
+            <TextBox x:Name="txtServerPort" VerticalAlignment="Center" />
+
+            <Button x:Name="btnConnect" Grid.ColumnSpan="2" Content="Connect" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnConnect_Click" Margin="0,10" />
+        </StackPanel>
+    </Grid>
+</UserControl>
