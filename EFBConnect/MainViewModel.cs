@@ -11,17 +11,18 @@ namespace EFBConnect
         IPAddress
     }
 
-    class MainViewModel : NotifyPropertyChanged
+    class MainViewModel : ObservableObject
     {
-        private SimConnectInstance sc;
-        private bool scConnected = false;
+        private EFBConnectClient efbConnect;
         private Config cfg;
         private DispatcherTimer timer;
 
         public MainViewModel()
         {
+#if DEBUG
             if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()))
             {
+#endif
                 cfg = new Config("EFBConnect.xml", new List<Type> { typeof(ConnectionType) });
 
                 _connection = cfg.Get<ConnectionType>("ConnectionType", ConnectionType.Broadcast, true);
@@ -32,32 +33,38 @@ namespace EFBConnect
                     SetIP(_deviceIp);
                 }
 
+                ConnectionStatus = "Disconnected from flight simulator.";
+
+                efbConnect = new EFBConnectClient();
+                efbConnect.PropertyChanged += Simulator_PropertyChanged;
+                efbConnect.Initialize();
+
                 timer = new DispatcherTimer();
                 timer.Interval = TimeSpan.FromSeconds(10);
                 timer.Tick += timer_Tick;
+                timer.Start();
+#if DEBUG
+            }
+#endif
+        }
 
-                sc = new SimConnectInstance();
-                sc.OpenEvent += sc_OnRecvOpenEvent;
-                sc.DisconnectEvent += sc_OnRecvDisconnectEvent;
-
-                if (SimConnectHelpers.IsLocalRunning)
-                {
-                    sc.Connect();
-                }
-                else
-                {
-                    ConnectedString = "Disconnected from Flight Simulator.";
-                    timer.Start();
-                }
+        private void Simulator_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (efbConnect.Connected)
+            {
+                timer.Stop();
+                ConnectionStatus = $"Connected to {efbConnect.SimulatorName}.";
+            }
+            else
+            {
+                timer.Start();
+                ConnectionStatus = "Disconnected from flight simulator.";
             }
         }
 
         void timer_Tick(object sender, EventArgs e)
         {
-            if (SimConnectHelpers.IsLocalRunning)
-            {
-                sc.Connect();
-            }
+            efbConnect.Initialize();
         }
 
         private ConnectionType _connection = ConnectionType.Broadcast;
@@ -66,7 +73,7 @@ namespace EFBConnect
             get { return _connection; }
             set
             {
-                SetProperty(ref _connection, value);
+                SetField(ref _connection, value);
                 switch (value)
                 {
                     case ConnectionType.Broadcast:
@@ -83,14 +90,14 @@ namespace EFBConnect
         public string CurrentIpSetting
         {
             get { return _currentIpSetting; }
-            set { SetProperty(ref _currentIpSetting, value); }
+            set { SetField(ref _currentIpSetting, value); }
         }
 
         private string _connectedString;
-        public string ConnectedString
+        public string ConnectionStatus
         {
             get { return _connectedString; }
-            set { SetProperty(ref _connectedString, value); }
+            set { SetField(ref _connectedString, value); }
         }
 
         private bool SetIP(string value)
@@ -109,29 +116,12 @@ namespace EFBConnect
             }
         }
 
-        private void sc_OnRecvOpenEvent(object sender, OpenEventArgs e)
-        {
-            timer.Stop();
-            scConnected = true;
-            ConnectedString = string.Format("Connected to {0}.", e.SimulatorName);
-        }
-
-        private void sc_OnRecvDisconnectEvent(object sender, EventArgs e)
-        {
-            timer.Start();
-            scConnected = false;
-            ConnectedString = "Disconnected from Flight Simulator.";
-        }
-
         internal void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             cfg.Set("ConnectionType", _connection);
             cfg.Set("IPAddress", _deviceIp);
             cfg.Save();
-            if (scConnected)
-            {
-                sc.Disconnect();
-            }
+            efbConnect.Uninitialize();
         }
 
         #region Message Dialog Bindings
@@ -147,28 +137,28 @@ namespace EFBConnect
         public bool OverlayEnabled
         {
             get { return _overlayEnabled; }
-            set { SetProperty(ref _overlayEnabled, value); }
+            set { SetField(ref _overlayEnabled, value); }
         }
 
         private bool _messageDialogEnabled = false;
         public bool MessageDialogEnabled
         {
             get { return _messageDialogEnabled; }
-            set { SetProperty(ref _messageDialogEnabled, value); OverlayEnabled = value; }
+            set { SetField(ref _messageDialogEnabled, value); OverlayEnabled = value; }
         }
 
         private string _messageDialogTitle;
         public string MessageDialogTitle
         {
             get { return _messageDialogTitle; }
-            set { SetProperty(ref _messageDialogTitle, value); }
+            set { SetField(ref _messageDialogTitle, value); }
         }
 
         private string _messageDialogContent;
         public string MessageDialogContent
         {
             get { return _messageDialogContent; }
-            set { SetProperty(ref _messageDialogContent, value); }
+            set { SetField(ref _messageDialogContent, value); }
         }
 
         private ICommand _messageDialogClose;
@@ -188,7 +178,7 @@ namespace EFBConnect
         public bool SetIpDialogEnabled
         {
             get { return _ipSetDialogEnabled; }
-            set { SetProperty(ref _ipSetDialogEnabled, value); OverlayEnabled = value; }
+            set { SetField(ref _ipSetDialogEnabled, value); OverlayEnabled = value; }
         }
 
         private string _deviceIp;
@@ -197,7 +187,7 @@ namespace EFBConnect
             get { return _deviceIp; }
             set
             {
-                SetProperty(ref _deviceIp, value);
+                SetField(ref _deviceIp, value);
             }
         }
 

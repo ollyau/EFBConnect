@@ -35,8 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BeatlesBlog.SimConnect">
-      <HintPath>..\..\..\..\Visual Studio 2013\Libraries\BeatlesBlog.SimConnect.SDK\Libs\BeatlesBlog.SimConnect.dll</HintPath>
+    <Reference Include="BeatlesBlog.SimConnect, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BeatlesBlog.SimConnect.0.1.1\lib\net35\BeatlesBlog.SimConnect.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -63,9 +63,10 @@
     <Compile Include="Coordinate.cs" />
     <Compile Include="DataStructures.cs" />
     <Compile Include="Log.cs" />
-    <Compile Include="NotifyPropertyChanged.cs" />
+    <Compile Include="ObservableObject.cs" />
     <Compile Include="RelayCommand.cs" />
-    <Compile Include="SimConnectInstance.cs" />
+    <Compile Include="SimConnectClient.cs" />
+    <Compile Include="EFBConnectClient.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -100,6 +101,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

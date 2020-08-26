@@ -20,7 +20,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Margin="5,0,5,10" FontSize="16" Text="{Binding ConnectedString}" />
+            <TextBlock Grid.Row="0" Margin="5,0,5,10" FontSize="16" Text="{Binding ConnectionStatus}" />
             <Expander Grid.Row="1" Header="Options" Margin="5">
                 <Grid Margin="20,5">
                     <Grid.RowDefinitions>

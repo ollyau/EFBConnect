@@ -10,67 +10,56 @@ namespace EFBConnect
         private static readonly Lazy<Log> instance = new Lazy<Log>(() => new Log());
         public static Log Instance { get { return instance.Value; } }
 
-        public bool ShouldSave = false;
-
-        private string AssemblyLoadDirectory
-        {
-            get { return Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath); }
-        }
-
-        private DateTime GetLinkerTimeStamp()
-        {
-            const int headerOffset = 60;
-            const int timeStampOffset = 8;
-            byte[] data = new byte[2048];
-            using (var s = new FileStream(Assembly.GetExecutingAssembly().Location, FileMode.Open, FileAccess.Read))
-            {
-                s.Read(data, 0, 2048);
-            }
-            int dataOffset = BitConverter.ToInt32(data, headerOffset);
-            uint unixTime = BitConverter.ToUInt32(data, dataOffset + timeStampOffset);
-            return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(unixTime);
-        }
-
         private StringBuilder logData;
+        public bool ShouldSave = false;
 
         private Log()
         {
             logData = new StringBuilder();
-            logData.AppendLine(string.Format("Program built at {0} (version {1})\r\nLogging enabled at {2}\r\n",
-                GetLinkerTimeStamp().ToString("yyyy-MM-ddTHH:mm:ssZ"),
-                Assembly.GetExecutingAssembly().GetName().Version,
-                DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffzzz")));
+            var initTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffzzz");
+            var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            Info($"Logging enabled at {initTime} (version {version})");
         }
 
-        public void WriteLine(string s)
+        private string AssemblyLoadDirectory
         {
-            System.Diagnostics.Debug.WriteLine(s);
-            logData.AppendLine(s);
+            get { return Path.GetDirectoryName(new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath); }
         }
 
-        public void Info(string s)
+        private void WriteLine(string level, string area, string s)
         {
-            string message = string.Format("{0} Info {1}", DateTime.Now.ToString("HH:mm:ss.fff"), s);
+            var message = $"[{DateTime.Now:HH:mm:ss.fff}][{level}][{area}] {s}";
             System.Diagnostics.Debug.WriteLine(message);
             logData.AppendLine(message);
         }
 
-        public void Warning(string s)
+        [System.Diagnostics.Conditional("DEBUG")]
+        public void Debug(string s, [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = "", [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
+        {
+            var area = $"{Path.GetFileNameWithoutExtension(sourceFilePath)}::{memberName}";
+            WriteLine("Debug", area, s);
+        }
+
+        public void Info(string s, [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = "", [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
+        {
+            var area = $"{Path.GetFileNameWithoutExtension(sourceFilePath)}::{memberName}";
+            WriteLine("Info", area, s);
+        }
+
+        public void Warning(string s, [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = "", [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
         {
 #if DEBUG
             ShouldSave = true;
 #endif
-            string message = string.Format("{0} Warning {1}", DateTime.Now.ToString("HH:mm:ss.fff"), s);
-            System.Diagnostics.Debug.WriteLine(message);
-            logData.AppendLine(message);
+            var area = $"{Path.GetFileNameWithoutExtension(sourceFilePath)}::{memberName}";
+            WriteLine("Warning", area, s);
         }
 
-        public void Error(string s, bool assert = false)
+        public void Error(string s, bool assert = false, [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = "", [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
         {
             ShouldSave = true;
-            string message = string.Format("{0} Error {1}", DateTime.Now.ToString("HH:mm:ss.fff"), s);
-            System.Diagnostics.Debug.WriteLine(message);
-            logData.AppendLine(message);
+            var area = $"{Path.GetFileNameWithoutExtension(sourceFilePath)}::{memberName}";
+            WriteLine("Error", area, s);
             if (assert)
             {
                 throw new Exception(s);
@@ -79,9 +68,19 @@ namespace EFBConnect
 
         public void Save()
         {
-            using (var outfile = new StreamWriter(Path.Combine(AssemblyLoadDirectory, string.Format("Log_{0}.txt", DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")))))
+            var filename = $"Log_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.txt";
+            var path = Path.Combine(AssemblyLoadDirectory, filename);
+            using (var dest = new StreamWriter(path))
             {
-                outfile.Write(logData);
+                dest.Write(logData);
+            }
+        }
+
+        public void Save(string path)
+        {
+            using (var dest = new StreamWriter(path))
+            {
+                dest.Write(logData);
             }
         }
 
@@ -90,14 +89,6 @@ namespace EFBConnect
             if (ShouldSave)
             {
                 Save();
-            }
-        }
-
-        public void Save(string path)
-        {
-            using (var outfile = new StreamWriter(path))
-            {
-                outfile.Write(logData);
             }
         }
     }
