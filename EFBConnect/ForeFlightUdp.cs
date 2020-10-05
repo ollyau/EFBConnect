@@ -86,14 +86,18 @@ namespace EFBConnect
             {
                 if (udpSocket != null)
                 {
-                    var trafficDatagram = string.Format(
-                        "XTRAFFIC{0},{1},{2:0.#####},{3:0.#####},{4:0.#},{5:0.#},{6},{7:0.###},{8:0.#},{9}",
-                        simIdent, dwObjectID, t.Latitude, t.Longitude, t.Altitude, t.VerticalSpeed,
-                        t.OnGround ? 0 : 1, t.TrueHeading, t.GroundVelocity,
-                        (string.IsNullOrEmpty(t.Airline) || string.IsNullOrEmpty(t.FlightNumber)) ? t.TailNumber : t.Airline + " " + t.FlightNumber
-                        );
-                    udpSocket.SendTo(Encoding.ASCII.GetBytes(trafficDatagram), ipEndPoint);
-                    //log.Info(trafficDatagram);
+                    if (t.UserSim == false)
+                    {
+                        var trafficDatagram = string.Format(
+                            "XTRAFFIC{0},{1},{2:0.#####},{3:0.#####},{4:0.#},{5:0.#},{6},{7:0.###},{8:0.#},{9}",
+                            simIdent, dwObjectID, t.Latitude, t.Longitude, t.Altitude, t.VerticalSpeed,
+                            t.OnGround ? 0 : 1, t.TrueHeading, t.GroundVelocity,
+                            (string.IsNullOrEmpty(t.Airline) || string.IsNullOrEmpty(t.FlightNumber)) ? t.TailNumber : t.Airline + " " + t.FlightNumber
+                            );
+                        udpSocket.SendTo(Encoding.ASCII.GetBytes(trafficDatagram), ipEndPoint);
+                        //log.Info(trafficDatagram);
+                    }
+
                 }
             }
         }

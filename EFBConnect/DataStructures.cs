@@ -53,6 +53,9 @@ namespace EFBConnect
 
         [DataItem("ATC FLIGHT NUMBER", 8)]
         public string FlightNumber;
+
+        [DataItem("IS USER SIM", "bool")]
+        public bool UserSim;
     }
 
     [DataStruct()]
