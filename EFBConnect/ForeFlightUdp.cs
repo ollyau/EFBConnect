@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -54,7 +55,7 @@ namespace EFBConnect
             {
                 if (udpSocket != null)
                 {
-                    var posDatagram = string.Format(
+                    var posDatagram = string.Format(CultureInfo.InvariantCulture,
                         "XGPS{0},{1:0.#####},{2:0.#####},{3:0.#},{4:0.###},{5:0.#}",
                         simIdent, p.Longitude, p.Latitude, p.Altitude, p.GroundTrack, p.GroundSpeed
                         );
@@ -70,7 +71,7 @@ namespace EFBConnect
             {
                 if (udpSocket != null)
                 {
-                    var attDatagram = string.Format(
+                    var attDatagram = string.Format(CultureInfo.InvariantCulture,
                         "XATT{0},{1:0.#},{2:0.#},{3:0.#}",
                         simIdent, a.TrueHeading, -a.Pitch, -a.Bank
                         );
@@ -86,7 +87,7 @@ namespace EFBConnect
             {
                 if (udpSocket != null)
                 {
-                    var trafficDatagram = string.Format(
+                    var trafficDatagram = string.Format(CultureInfo.InvariantCulture,
                         "XTRAFFIC{0},{1},{2:0.#####},{3:0.#####},{4:0.#},{5:0.#},{6},{7:0.###},{8:0.#},{9}",
                         simIdent, dwObjectID, t.Latitude, t.Longitude, t.Altitude, t.VerticalSpeed,
                         t.OnGround ? 0 : 1, t.TrueHeading, t.GroundVelocity,

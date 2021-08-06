@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows.Input;
 using System.Windows.Threading;
 
@@ -28,10 +29,19 @@ namespace EFBConnect
                 _connection = cfg.Get<ConnectionType>("ConnectionType", ConnectionType.Broadcast, true);
                 _deviceIp = cfg.Get<string>("IPAddress", null, true);
 
-                if (!string.IsNullOrEmpty(_deviceIp))
+                switch (_connection)
                 {
-                    SetIP(_deviceIp);
-                }
+                    case ConnectionType.IPAddress:
+                        SetIP( string.IsNullOrWhiteSpace( _deviceIp ) ? null : _deviceIp );
+                        break;
+                    case ConnectionType.Broadcast:
+                        SetIP( null );
+                        break;
+                    default:
+                        var message = $"Unknown ConnectionType '{Enum.GetName( typeof( ConnectionType ), _connection )}'";
+                        Log.Instance.Error( message );
+                        throw new InvalidOperationException( message );
+				}
 
                 ConnectionStatus = "Disconnected from flight simulator.";
 
@@ -53,7 +63,8 @@ namespace EFBConnect
             if (efbConnect.Connected)
             {
                 timer.Stop();
-                ConnectionStatus = $"Connected to {efbConnect.SimulatorName}.";
+                var name = efbConnect.SimulatorName == "KittyHawk" ? "Microsoft Flight Simulator" : efbConnect.SimulatorName;
+                ConnectionStatus = $"Connected to {name}.";
             }
             else
             {
@@ -105,7 +116,7 @@ namespace EFBConnect
             System.Net.IPAddress ipValue;
             if (!string.IsNullOrEmpty(value) && System.Net.IPAddress.TryParse(value, out ipValue))
             {
-                CurrentIpSetting = string.Format("IP Address ({0})", value);
+                CurrentIpSetting = string.Format(CultureInfo.InvariantCulture, "IP Address ({0})", value);
                 ForeFlightUdp.Instance.SetDestination(ipValue);
                 return true;
             }
