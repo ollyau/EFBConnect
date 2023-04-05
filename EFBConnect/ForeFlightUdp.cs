@@ -16,7 +16,7 @@ namespace EFBConnect
         private IPEndPoint ipEndPoint;
         private Log log;
         private string simIdent;
-        private const int foreFlightPort = 49002;
+        private const int foreFlightPort = 49000;
 
         private ForeFlightUdp()
         {
